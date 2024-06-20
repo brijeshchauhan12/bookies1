@@ -6,10 +6,7 @@ import com.ma.bookies1.responses.LoginResponse;
 import com.ma.bookies1.service.AuthenticationService;
 import com.ma.bookies1.service.JwtService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/auth")
 @RestController
@@ -30,6 +27,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
         User authenticatedUser = authenticationService.authenticate(loginUserDto);
 
