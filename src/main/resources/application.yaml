@@ -1,0 +1,12 @@
+spring:
+  profile: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: admin123#BrijeshChauhan12
+    url: jdbc:mysql://localhost:3306/ET3
+    username: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+welcome:
+  message: Welcome to spring world in dev
