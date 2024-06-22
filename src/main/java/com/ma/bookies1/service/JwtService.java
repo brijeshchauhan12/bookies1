@@ -24,6 +24,7 @@ public class JwtService {
     private long jwtExpiration;
 
     public String extractUsername(String token) {
+
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -33,7 +34,10 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        Map<String, Object> claims = new HashMap<>();
+        System.out.println(userDetails.getAuthorities()+"while generatin the token");
+        claims.put("roles", userDetails.getAuthorities());
+        return generateToken(claims, userDetails);
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
@@ -65,10 +69,12 @@ public class JwtService {
     }
 
     private boolean isTokenExpired(String token) {
+
         return extractExpiration(token).before(new Date());
     }
 
     private Date extractExpiration(String token) {
+
         return extractClaim(token, Claims::getExpiration);
     }
 

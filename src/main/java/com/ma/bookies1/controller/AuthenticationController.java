@@ -21,6 +21,7 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
+
         User registeredUser = authenticationService.signup(registerUserDto);
 
         return ResponseEntity.ok(registeredUser);
@@ -30,6 +31,8 @@ public class AuthenticationController {
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
         User authenticatedUser = authenticationService.authenticate(loginUserDto);
+
+        System.out.println(authenticatedUser);
 
         String jwtToken = jwtService.generateToken(authenticatedUser);
 

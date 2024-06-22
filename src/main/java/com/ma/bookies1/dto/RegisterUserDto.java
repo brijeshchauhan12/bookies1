@@ -1,30 +1,23 @@
 package com.ma.bookies1.dto;
 
+import lombok.Getter;
+
+import java.util.Set;
+
+@Getter
 public class RegisterUserDto {
     private String email;
     private String password;
     private String fullName;
-
-    public String getEmail() {
-        return email;
-    }
-
+    private Set<String> roles;
     public RegisterUserDto setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public RegisterUserDto setPassword(String password) {
         this.password = password;
         return this;
-    }
-
-    public String getFullName() {
-        return fullName;
     }
 
     public RegisterUserDto setFullName(String fullName) {
