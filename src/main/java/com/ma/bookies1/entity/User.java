@@ -1,5 +1,6 @@
 package com.ma.bookies1.entity;
 
+import com.ma.bookies1.entity.book.Book;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -41,6 +42,11 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Book> books;
 
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
