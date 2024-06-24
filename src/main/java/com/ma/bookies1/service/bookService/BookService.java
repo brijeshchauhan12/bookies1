@@ -30,7 +30,7 @@ public class BookService {
             book.setUser(user);
             book.setAuthor(bookDto.getAuthor());
             book.setGrade(bookDto.getGrade());
-            book.setTitle(book.getTitle());
+            book.setTitle(bookDto.getTitle());
             System.out.println(book.toString()+"printing bookk");
             return bookRepository.save(book);
         } else {

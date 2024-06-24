@@ -2,6 +2,7 @@ package com.ma.bookies1.entity.book;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.ma.bookies1.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -32,6 +33,7 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     @CreationTimestamp

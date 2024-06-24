@@ -1,5 +1,6 @@
 package com.ma.bookies1.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ma.bookies1.entity.book.Book;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -46,6 +47,7 @@ public class User implements UserDetails {
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<Book> books;
 
     @CreationTimestamp
