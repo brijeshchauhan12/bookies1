@@ -31,7 +31,7 @@ public class Book {
     @Column(nullable = false)
     private String grade;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;

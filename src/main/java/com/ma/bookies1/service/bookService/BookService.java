@@ -7,6 +7,8 @@ import com.ma.bookies1.entity.book.Book;
 import com.ma.bookies1.repository.BookRepository;
 import com.ma.bookies1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +25,7 @@ public class BookService {
     public Book saveBook(BookDto bookDto) {
 
         Optional<User> userOptional = userRepository.findById(bookDto.getUserid());
+
         System.out.println(userOptional+"USER FOUND");
         Book book =new Book();
         if (userOptional.isPresent()) {
@@ -32,21 +35,29 @@ public class BookService {
             book.setGrade(bookDto.getGrade());
             book.setTitle(bookDto.getTitle());
             System.out.println(book.toString()+"printing bookk");
-            return bookRepository.save(book);
+            bookRepository.save(book);
+            return book;
         } else {
+            System.out.println("errorrrrrrrrrrrrrrrrrrrrrrrrrrrr");
             throw new RuntimeException("User not found" );
         }
     }
 
-    public List<Book> getAllBooks() {
-        return (List<Book>) bookRepository.findAll();
+    public List<Book> getAllBooksByAuthenticatedUser() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(userDetails+"username");
+        return (List<Book>) bookRepository.findAllByUser(userDetails.getUsername());
     }
 
     public Optional<Book> getBookById(Integer id) {
-        return bookRepository.findById(id);
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return bookRepository.findByIdAndUserName(id, userDetails.getUsername());
     }
 
     public void deleteBookById(Integer id) {
         bookRepository.deleteById(id);
     }
+
+
+
 }
