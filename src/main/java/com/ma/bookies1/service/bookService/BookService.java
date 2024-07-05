@@ -6,6 +6,7 @@ import com.ma.bookies1.entity.User;
 import com.ma.bookies1.entity.book.Book;
 import com.ma.bookies1.repository.BookRepository;
 import com.ma.bookies1.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,8 +55,13 @@ public class BookService {
         return bookRepository.findByIdAndUserName(id, userDetails.getUsername());
     }
 
+
+    @Transactional
     public void deleteBookById(Integer id) {
-        bookRepository.deleteById(id);
+        System.out.println(id+"id in service deleteBookById");
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> user = userRepository.findByEmail(userDetails.getUsername());
+        bookRepository.deleteByIdAndUser(id, user.get().getId());
     }
 
 
