@@ -61,5 +61,17 @@ public class BookController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateBook(@PathVariable Integer id) {
+        try {
+            Book updatedBook = bookService.updateBook(id);
+            return new ResponseEntity<>(updatedBook, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
 

@@ -25,4 +25,6 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
     @Query(value = "DELETE FROM books WHERE id = ?1 and user_id = ?2", nativeQuery = true)
     void deleteByIdAndUser(Integer id, Integer user_id);
 
+    @Query(value = "select b.* FROM books b WHERE b.listable=true ", nativeQuery = true)
+    List<Book> finAllListableBooks();
 }

@@ -65,5 +65,18 @@ public class BookService {
     }
 
 
+    public Book updateBook(Integer bookId) {
+        Optional<Book> bookOptional = bookRepository.findById(bookId);
+        if (bookOptional.isPresent()) {
+            Book book = bookOptional.get();
+            book.setListable(true);
+            return bookRepository.save(book);
+        } else {
+            throw new RuntimeException("Book not found");
+        }
+    }
 
+    public List<Book> gtListableBook() {
+        return bookRepository.finAllListableBooks();
+    }
 }

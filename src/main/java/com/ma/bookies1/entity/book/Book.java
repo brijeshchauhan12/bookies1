@@ -31,6 +31,9 @@ public class Book {
     @Column(nullable = false)
     private String grade;
 
+    @Column(nullable = false, columnDefinition = "varchar(255) default false")
+    private boolean listable=false;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
