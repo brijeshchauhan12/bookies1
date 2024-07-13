@@ -55,6 +55,10 @@ public class BookService {
         return bookRepository.findByIdAndUserName(id, userDetails.getUsername());
     }
 
+    public Optional<Book> getBookByIdPublic(Integer id){
+        return bookRepository.findById(id);
+    }
+
 
     @Transactional
     public void deleteBookById(Integer id) {

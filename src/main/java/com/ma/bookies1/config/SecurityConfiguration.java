@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                 .disable()
                 .cors(c->c.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests()
-                .requestMatchers( "/auth/signup", "/auth/login","/api/pub/book").permitAll()
+                .requestMatchers( "/auth/signup", "/auth/login","/api/pub/**").permitAll()
 
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
