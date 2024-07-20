@@ -1,3 +1,4 @@
+
 package com.ma.bookies1.controller.bookController;
 import com.ma.bookies1.entity.User;
 import com.ma.bookies1.entity.book.Book;
@@ -23,7 +24,11 @@ public class UserByBookId {
         Optional<Book> book = bookService.getBookByIdPublic(id);
         User user=book.get().getUser();
         String email= user.getEmail();
+        String userName=user.getFullName();
 
-        return new ResponseEntity<>(email, HttpStatus.OK);
+        String emailandName=email+"*"+userName;
+
+        return new ResponseEntity<>(emailandName, HttpStatus.OK);
     }
 }
+

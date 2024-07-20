@@ -1,6 +1,4 @@
 package com.ma.bookies1.service.bookService;
-
-
 import com.ma.bookies1.dto.BookDto;
 import com.ma.bookies1.entity.User;
 import com.ma.bookies1.entity.book.Book;
@@ -8,6 +6,8 @@ import com.ma.bookies1.repository.BookRepository;
 import com.ma.bookies1.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -35,6 +35,20 @@ public class BookService {
             book.setAuthor(bookDto.getAuthor());
             book.setGrade(bookDto.getGrade());
             book.setTitle(bookDto.getTitle());
+            book.setBoard(bookDto.getBoard());
+            book.setGenre(bookDto.getGenre());
+            book.setCountry(bookDto.getCountry());
+            book.setEdition(bookDto.getEdition());
+            book.setDescription(bookDto.getDescription());
+            book.setIsbn(bookDto.getIsbn());
+            book.setLanguage(bookDto.getLanguage());
+            book.setYear(bookDto.getYear());
+            book.setPages(bookDto.getPages());
+            book.setPublisher(bookDto.getPublisher());
+
+            book.setQuantity(bookDto.getQuantity());
+            book.setPrice(bookDto.getPrice());
+
             System.out.println(book.toString()+"printing bookk");
             bookRepository.save(book);
             return book;
@@ -80,7 +94,21 @@ public class BookService {
         }
     }
 
-    public List<Book> gtListableBook() {
-        return bookRepository.finAllListableBooks();
+    // public List<Book> gtListableBook() {
+    //     return bookRepository.finAllListableBooks();
+    // }
+
+    public Page<Book> gtListableBook(PageRequest pageRequest) {
+        return bookRepository.gtListableBook(pageRequest);
     }
+
+    // public List<Book> searchBooksByTitle(String title) {
+    //     return bookRepository.findByTitleContaining(title);
+    // }
+
+    public List<Book> searchBooksBySearchText(String searchText) {
+        return bookRepository.findBookBySearchText(searchText);
+
+    }
+
 }

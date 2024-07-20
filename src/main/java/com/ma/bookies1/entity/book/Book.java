@@ -1,3 +1,4 @@
+
 package com.ma.bookies1.entity.book;
 
 
@@ -30,6 +31,48 @@ public class Book {
 
     @Column(nullable = false)
     private String grade;
+
+    @Column(nullable = false)
+    private String genre;
+
+    @Column(nullable = false)
+    private String board;
+
+    @Column(nullable = false)
+    private String description;
+
+
+
+    @Column(nullable = false)
+    private String isbn;
+
+    @Column(nullable = false)
+    private String language;
+
+    @Column(nullable = false)
+    private String year;
+
+    @Column(nullable = false)
+    private Integer pages;
+
+    @Column(nullable = false)
+    private String publisher;
+
+    @Column(nullable = false)
+    private String country;
+
+    @Column(nullable = false)
+    private String edition;
+
+    @Column(nullable = false)
+    private Integer quantity;
+
+
+    @Column(nullable = false)
+    private Double price;
+
+
+
 
     @Column(nullable = false, columnDefinition = "varchar(255) default false")
     private boolean listable=false;
