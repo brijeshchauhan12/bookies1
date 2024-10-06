@@ -18,7 +18,6 @@ public class BookDto {
     private String author; // Consider changing to List<String> if supporting multiple authors
     private String isbn;
     private String publisher;
-
     private Integer pages;
     private String language;
     private String edition;
@@ -30,6 +29,4 @@ public class BookDto {
     private String board;
     private String grade;
     private String year;
-
-
 }

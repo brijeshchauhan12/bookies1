@@ -1,4 +1,5 @@
 package com.ma.bookies1.service;
+import com.ma.bookies1.dto.UserShow;
 import com.ma.bookies1.entity.User;
 import com.ma.bookies1.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> allUsers() {
-        List<User> users = new ArrayList<>();
+    public List<?> allUsers() {
+        // List<User> users = new ArrayList<>();
 
-        userRepository.findAll().forEach(users::add);
+        return userRepository.findAllUserWithTheirRoles();
 
-        return users;
+
+    }
+
+    public List<?> allBooks() {
+        return userRepository.findAllBooksWithUsers();
     }
 }

@@ -1,9 +1,22 @@
 package com.ma.bookies1.responses;
 
+import com.ma.bookies1.entity.Role;
+
 public class LoginResponse {
     private String token;
 
     private long expiresIn;
+
+    private String roles;
+
+    public String getRole() {
+        return roles;
+    }
+
+    public LoginResponse setRole(String roles) {
+        this.roles = roles;
+        return this;
+    }
 
     public String getToken() {
         return token;

@@ -1,5 +1,6 @@
 package com.ma.bookies1.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ma.bookies1.entity.book.Book;
 import jakarta.persistence.*;
@@ -33,6 +34,29 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private String phoneNumber;
+
+    @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false)
+    private String city;
+
+    @Column(nullable = false)
+    private String country;
+
+    @Column(nullable = false)
+    private String postalCode;
+
+    @Column(nullable = false)
+    private String sex;
+
+    @Column(updatable = true, name="date_of_birth", nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private Date dateOfBirth;
+
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
@@ -110,6 +134,41 @@ public class User implements UserDetails {
         return this;
     }
 
+    public User setPhoneNumber (String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public User setAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public User setCity(String city) {
+        this.city = city;
+        return this;
+    }
+
+    public User setCountry(String country) {
+        this.country = country;
+        return this;
+    }
+    public User setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+        return this;
+    }
+
+    public User setSex(String sex){
+        this.sex=sex;
+        return this;
+    }
+
+    public User setDateOfBirth(Date dateOfBirth){
+        this.dateOfBirth=dateOfBirth;
+        return this;
+    }
+
+
     public User setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
         return this;
@@ -131,4 +190,9 @@ public class User implements UserDetails {
                 ", updatedAt=" + updatedAt +
                 '}';
     }
+
+    // public Object setPhoneNumber(String phoneNumber) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'setPhoneNumber'");
+    // }
 }

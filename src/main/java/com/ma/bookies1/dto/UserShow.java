@@ -1,14 +1,11 @@
 package com.ma.bookies1.dto;
 
-import lombok.Getter;
-
 import java.util.Date;
 import java.util.Set;
 
-@Getter
-public class RegisterUserDto {
+public class UserShow {
     private String email;
-    private String password;
+    // private String password;
     private String fullName;
     private String phoneNumber;
     private String address;
@@ -17,60 +14,55 @@ public class RegisterUserDto {
     private String postalCode;
     private String sex;
     private Date dateOfBirth;
-    private Set<String> roles;
-    public RegisterUserDto setEmail(String email) {
+    private String UserRole;
+    public UserShow setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public RegisterUserDto setPassword(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public RegisterUserDto setFullName(String fullName) {
+    public UserShow setFullName(String fullName) {
         this.fullName = fullName;
         return this;
     }
-    public RegisterUserDto setPhoneNumber(String phoneNumber) {
+    public UserShow setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
     }
 
-    public RegisterUserDto setAddress(String address) {
+    public UserShow setAddress(String address) {
         this.address = address;
         return this;
     }
 
-    public RegisterUserDto setCity(String city) {
+    public UserShow setCity(String city) {
         this.city = city;
         return this;
     }
 
-    public RegisterUserDto setCountry(String country) {
+    public UserShow setCountry(String country) {
         this.country = country;
         return this;
     }
-    public RegisterUserDto setPostalCode(String postalCode) {
+    public UserShow setPostalCode(String postalCode) {
         this.postalCode = postalCode;
         return this;
     }
 
-    public RegisterUserDto setSex(String sex){
+    public UserShow setSex(String sex){
         this.sex=sex;
         return this;
     }
 
-    public RegisterUserDto setDateOfBirth(Date dateOfBirth){
+    public UserShow setDateOfBirth(Date dateOfBirth){
         this.dateOfBirth=dateOfBirth;
         return this;
     }
 
     @Override
     public String toString() {
-        return "RegisterUserDto{" +
+        return "UserShow{" +
                 "email='" + email + '\'' +
-                ", password='" + password + '\'' +
+
                 ", fullName='" + fullName + '\'' +
                 '}';
     }

@@ -3,6 +3,7 @@ package com.ma.bookies1.controller.bookController;
 
 
 import com.ma.bookies1.dto.BookDto;
+import com.ma.bookies1.dto.bookDto2;
 import com.ma.bookies1.entity.book.Book;
 import com.ma.bookies1.service.bookService.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.ma.bookies1.error.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,8 +32,15 @@ public class BookController {
         } catch (DataIntegrityViolationException e) {
             System.err.println("Data integrity violation: " + e.getMessage());
             // Log more details if necessary
+
             return new ResponseEntity<>(HttpStatus.CONFLICT);
-        } catch (Exception e) {
+        }
+        catch(IllegalArgumentException e){
+            System.err.println("Illegal Argument: " + e.getMessage());
+
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        catch (Exception e) {
             System.err.println("An unexpected error occurred: " + e.getMessage());
             // Log stack trace or more details if necessary
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -66,6 +75,18 @@ public class BookController {
     public ResponseEntity<?> updateBook(@PathVariable Integer id) {
         try {
             Book updatedBook = bookService.updateBook(id);
+            return new ResponseEntity<>(updatedBook, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("updatebookdetails/{id}")
+    public ResponseEntity<?> updateBookDetails(@PathVariable Integer id, @RequestBody BookDto bookDto) {
+        try {
+            Book updatedBook = bookService.updateBookDetails(id,bookDto);
             return new ResponseEntity<>(updatedBook, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

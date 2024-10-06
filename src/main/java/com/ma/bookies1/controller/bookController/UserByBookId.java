@@ -25,8 +25,9 @@ public class UserByBookId {
         User user=book.get().getUser();
         String email= user.getEmail();
         String userName=user.getFullName();
+        int userid=user.getId();
 
-        String emailandName=email+"*"+userName;
+        String emailandName=email+"*"+userName+"*"+userid;
 
         return new ResponseEntity<>(emailandName, HttpStatus.OK);
     }

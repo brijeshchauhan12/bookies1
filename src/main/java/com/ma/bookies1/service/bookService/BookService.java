@@ -1,5 +1,6 @@
 package com.ma.bookies1.service.bookService;
 import com.ma.bookies1.dto.BookDto;
+import com.ma.bookies1.dto.bookDto2;
 import com.ma.bookies1.entity.User;
 import com.ma.bookies1.entity.book.Book;
 import com.ma.bookies1.repository.BookRepository;
@@ -28,6 +29,13 @@ public class BookService {
         Optional<User> userOptional = userRepository.findById(bookDto.getUserid());
 
         System.out.println(userOptional+"USER FOUND");
+
+        // Check if a book with the same title already exists
+        Optional<Book> existingBook = bookRepository.findByTitleAndUserId(bookDto.getTitle(), bookDto.getUserid());
+        if (existingBook.isPresent()) {
+            // Throw an exception or handle it as per your application's requirement
+            throw new IllegalArgumentException("Book with title '" + bookDto.getTitle() + "' already exists.");
+        }
         Book book =new Book();
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -85,9 +93,47 @@ public class BookService {
 
     public Book updateBook(Integer bookId) {
         Optional<Book> bookOptional = bookRepository.findById(bookId);
+
         if (bookOptional.isPresent()) {
             Book book = bookOptional.get();
             book.setListable(true);
+            return bookRepository.save(book);
+        } else {
+            throw new RuntimeException("Book not found");
+        }
+    }
+
+
+
+    public Book updateBookDetails(Integer bookId, BookDto bookDto) {
+        Optional<Book> bookOptional = bookRepository.findById(bookId);
+
+        // Check if a book with the same title already exists
+        System.out.println(bookDto.getUserid()+"user id"+bookDto.getTitle()+"title");
+        Integer x = bookRepository.findByTitleAndUserIdUpdate(bookDto.getTitle(), bookDto.getUserid());
+        // System.out.println(existingBook.toString());
+        if (x>1) {
+            // Throw an exception or handle it as per your application's requirement
+            throw new IllegalArgumentException("Book with title '" + bookDto.getTitle() + "' already exists.");
+        }
+
+        if (bookOptional.isPresent()) {
+            Book book = bookOptional.get();
+            book.setAuthor(bookDto.getAuthor());
+            book.setGrade(bookDto.getGrade());
+            book.setTitle(bookDto.getTitle());
+            book.setBoard(bookDto.getBoard());
+            book.setGenre(bookDto.getGenre());
+            book.setCountry(bookDto.getCountry());
+            book.setEdition(bookDto.getEdition());
+            book.setDescription(bookDto.getDescription());
+            book.setIsbn(bookDto.getIsbn());
+            book.setLanguage(bookDto.getLanguage());
+            book.setYear(bookDto.getYear());
+            book.setPages(bookDto.getPages());
+            book.setPublisher(bookDto.getPublisher());
+            book.setQuantity(bookDto.getQuantity());
+            book.setPrice(bookDto.getPrice());
             return bookRepository.save(book);
         } else {
             throw new RuntimeException("Book not found");

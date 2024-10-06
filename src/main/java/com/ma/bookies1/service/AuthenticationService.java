@@ -40,7 +40,15 @@ public class AuthenticationService {
         var user = new User()
                 .setFullName(input.getFullName())
                 .setEmail(input.getEmail())
+                .setPhoneNumber(input.getPhoneNumber())
+                .setCity(input.getCity())
+                .setCountry(input.getCountry())
+                .setPostalCode(input.getPostalCode())
+                .setSex(input.getSex())
+                .setDateOfBirth(input.getDateOfBirth())
+                .setAddress(input.getAddress())
                 .setPassword(passwordEncoder.encode(input.getPassword()));
+
 
         Set<String> strRoles = input.getRoles();
         Set<Role> roles = new HashSet<>();

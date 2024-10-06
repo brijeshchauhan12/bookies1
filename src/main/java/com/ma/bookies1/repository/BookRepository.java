@@ -40,4 +40,9 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 
     @Query(value = "select b.* FROM books b WHERE b.listable=true and (b.title LIKE %?1% OR b.author LIKE %?1% OR b.grade LIKE %?1%) limit 10", nativeQuery = true)
     List<Book> findBookBySearchText(String searchText);
+
+
+    Optional<Book> findByTitleAndUserId(String title, Integer userId);
+    @Query(value = "select count(*) as cnt from books WHERE title = ?1 and user_id = ?2", nativeQuery = true)
+    Integer findByTitleAndUserIdUpdate(String title, Integer userId);
 }
