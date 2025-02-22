@@ -31,3 +31,4 @@ networks:
   app-network:
     driver: bridge
 #  docker-compose up --build  # Rebuild and start again
+#  docker exec -it mysql-db mysql -u root -p
