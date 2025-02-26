@@ -32,6 +32,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      - name: Verify Docker Compose Installation
+        run: docker-compose --version
+
       - name: Build the Spring Boot application
         run: mvn clean package -DskipTests
 
